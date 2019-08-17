@@ -1,0 +1,55 @@
+<template>  
+    <div class="container template" id="general-template" data-tab="general"> 
+        <style>
+            .button {
+                background-color: #E6E6E6;
+                border: 0px;
+                width: 50%;
+                border-radius: 12px;
+                color: black;
+                padding: 10px 25px;
+                text-align: left;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 30px;
+                margin: 4px 4px;
+                cursor: pointer;
+            }
+
+            .button:hover{
+                background-color: #CDCDCD; 
+            }
+
+            .horizontal {
+                padding: 30px 0;
+                float: none;
+                text-align: center;
+                font-size: 16px;
+                font-family: 'Arial'
+            }
+
+            .horizontal li {        
+                margin: 0px;
+                display: inline-block;
+                width: 100%;
+                height: 110px;
+            }
+        </style>
+    
+        <ul class="horizontal">
+            <li>  
+                <button id="startStopButton" class="button" data-bind="click: StartStop"><img id="startStopIcon" src="images/play.png"><span id="startStopText">Start</span></button>
+            </li><br>
+            <li>    
+                <button class="button" data-bind="click: Reload"><img src="images/reload.png"> <span id="startStopText">Reload</span></button>
+            </li><br>
+            <li>    
+                <button class="button" data-bind="click: Tools"><img src="images/tools.png"><span id="startStopText">Tools</span></button>
+            </li><br>
+        </ul>
+    </div>
+</template>
+
+
+
+    

@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="styles/style.css">
+
+  <link rel="import" href="views/general.html">  
+  <link rel="import" href="views/settings.html">
+  <link rel="import" href="views/status.html">  
+  <link rel="import" href="views/logs.html">  
+  <link rel="import" href="views/troubleshoot.html">
+</head>
+<body>
+  <div class="container-liquid" style="height:100%;">
+    <div class="row h-100">
+        <div class="col-4 p-0 h-md-100 metris-bar">
+          <div class="text-white d-md-flex align-items-center h-100 p-5 text-center justify-content-center">
+              <div class="logoarea pt-5 pb-5">
+                  First half content here
+              </div>
+          </div>    
+        </div>
+        <div class="col-8">
+            <!-- Navigation bar -->
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+                <li class="nav-item">
+                    <a id="general-tab" class="nav-link active" href="#general" role="tab" data-toggle="tab">General</a>
+                  </li>          
+                <li class="nav-item">
+                  <a id="settings-tab" class="nav-link" href="#settings" role="tab" data-toggle="tab">Configuration</a>
+                </li>
+                <li class="nav-item">
+                  <a id="status-tab" class="nav-link" href="#status" role="tab" data-toggle="tab">Status</a>
+                </li>
+                <li class="nav-item">
+                  <a id="logs-tab" class="nav-link" href="#logs" role="tab" data-toggle="tab">Log</a>
+                </li>
+                <li class="nav-item">
+                    <a id="troubleshoot-tab" class="nav-link" href="#troubleshoot" role="tab" data-toggle="tab">Troubleshoot</a>
+                  </li>          
+              </ul>
+            <!-- Content -->
+              <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade show active" id="general"></div>
+                <div role="tabpanel" class="tab-pane fade" id="settings"></div>
+                <div role="tabpanel" class="tab-pane fade" id="status"></div>
+                <div role="tabpanel" class="tab-pane fade" id="logs"></div>
+                <div role="tabpanel" class="tab-pane fade" id="troubleshoot"></div>
+              </div>
+        </div>
+    </div>
+  </div>
+  <script>
+
+    require('./libs/renderer.js');
+    window.$ = window.jquery = require("jquery");
+    window.popper = require("popper.js");
+    require("bootstrap");
+
+    $(function() {
+      
+      const links = document.querySelectorAll('link[rel="import"]');
+      links.forEach((link) => {
+        let template = link.import.querySelector('template');
+        let clone = document.importNode(template.content, true);
+        let target = clone.querySelector(".template").dataset.tab;
+        document.getElementById(target).appendChild(clone);
+      }); 
+
+    });
+  </script>
+</body>
+</html>

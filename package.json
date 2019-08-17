@@ -1,0 +1,20 @@
+{
+  "name": "Metris.Connector.SystemTray",
+  "version": "1.0.0",
+  "description": "Copyright Andritz AG 2019. All rights reserved.",
+  "main": "main.js",
+  "author": "Andritz AG",
+  "homepage": "https://www.andritz.com/metris-en",
+  "devDependencies": {
+    "electron": "^3.1.13"
+  },
+  "dependencies": {
+    "jquery": "^3.3.1",
+    "bootstrap": "^4.3.1",
+    "popper.js": "^1.14.7",
+    "tether": "^1.4.0"
+  },
+  "scripts": {
+    "start": "electron ."
+  }
+}
