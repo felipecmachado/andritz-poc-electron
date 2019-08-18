@@ -5,16 +5,23 @@
  |  _  /|  __|   / /\ \ | |  | | | |\/| |  __|  
  | | \ \| |____ / ____ \| |__| | | |  | | |____ 
  |_|  \_\______/_/    \_\_____/  |_|  |_|______|
- 
-First of all, read this: https://electronjs.org/docs/tutorial/application-architecture
 
-We are currently using the following technologies:
-https://getbootstrap.com/
+Before adding new features or making changes, read this: https://electronjs.org/docs/tutorial/application-architecture
 
+That said, we are currently using the following technologies:
+1) https://electronjs.org/ 
+2) https://nodejs.org/en/ 
+3) https://getbootstrap.com/
+4) https://knockoutjs.com/
+5) JQuery
 
 Before start changing stuff, be aware:
 1) jQuery is a JS library for the browser, eg DOM manipulating, etc. You shouldn't use that in the main process, since the main process is running in NodeJS.
-2) We tried to keep the app simple.
+
+To run the app, use 'npm start'
+To build the app, use 'electron-build'
+
+Maintainability first!
 
 ***************************************************/
 
@@ -100,7 +107,7 @@ app.on('window-all-closed', () => {
     app.quit();
   }
 });
-1
+
 app.on('activate', () => {
   if (mainWindow === null) {
     createWindow()

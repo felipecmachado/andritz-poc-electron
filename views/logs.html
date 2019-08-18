@@ -1,5 +1,53 @@
 <template>
-    <div class="container template" id="logs-template" data-tab="logs">
-        <p>This is the Logs page</p>
+    <div class="container template" id="logs-template" data-tab="logs" style="margin-top:15px;">
+        <div style="min-height:420px; max-height:420px; width:100%; overflow:auto; display:inline-block;">
+        <table id="metris-table-logs" class="table table-sm table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Type</th>
+                <th scope="col">Message</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        </div>
+        <div class="card-footer text-muted" style="bottom: 0px;">
+            Messages are received only when this tab is active.
+        </div>
     </div>
+    <script>
+        // https://getbootstrap.com/docs/4.0/components/navs/#events
+        function configureLogsBehavior(){
+            $('#logs-tab').on('shown.bs.tab', function(){
+                connect();
+            });
+
+            $('#logs-tab').on('hidden.bs.tab', function(){
+                disconnect();
+            });
+        }
+
+        var interval;
+
+        function connect(){
+            interval = setInterval(function() {addRow();}, 1000);
+        }
+
+        function disconnect(){
+            clearInterval(interval);
+        }
+
+        function addRow(){
+            var today = new Date();
+            var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+            var row = "<tr><th scope='row'>" + time + "</th><td>LOG</td><td>Message</td></tr>"
+            $("#metris-table-logs tbody").prepend(row);
+        }
+
+        $(function() {
+            configureLogsBehavior();
+        });
+    </script>
 </template>
