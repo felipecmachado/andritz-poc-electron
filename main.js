@@ -128,9 +128,6 @@ app.on('activate', () => {
   }
 });
 
-/******************* */
-
-export function mainTestFileOpen() {
-  console.log('File open test function in main.js');
-}
-
+module.exports.setImage = function(path) {
+  tray.setImage(path);
+};
