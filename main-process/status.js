@@ -37,5 +37,6 @@ function getConnectorStatus(){
 
     }).on("error", (err) => {
         console.log("Error: " + err.message);
+        main.setImage('images/connectorPaused.png');
     });  
 }

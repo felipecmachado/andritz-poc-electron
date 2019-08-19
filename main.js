@@ -16,14 +16,15 @@ That said, we are currently using the following technologies:
 5) JQuery
 
 Before start changing stuff, be aware:
-1) jQuery is a JS library for the browser, eg DOM manipulating, etc. You shouldn't use that in the main process, since the main process is running in NodeJS.
-2) Do not add stuff in the main.js. Create a new file inside /main-process and it will be automatically loaded
-3) Try to use the current structure: /views /viewmodels /main-process
+1) jQuery is a JS library for the browser, eg DOM manipulating, etc. You shouldn't (and you can't) use that in the main process, since the main process is running in NodeJS.
+2) Do not add stuff in the main.js. Create a new file inside /main-process and it will be automatically loaded.
+3) Try to use the current structure: /views /viewmodels /main-process.
+4) Before create new processes, take a look at how a nodejs module work.
 
 To run the app, use 'npm start'
 To build the app, use 'electron-build'
 
-Maintainability first!
+Maintainability first, please! Others will work on this project after you.
 
 ***************************************************/
 
@@ -45,8 +46,7 @@ function createWindow() {
       show: false,
       title: app.getName(),
       webPreferences: {
-        nodeIntegration: true,
-        preload: path.join(__dirname, 'preload.js')
+        nodeIntegration: true
       }
     })
     mainWindow.loadFile('index.html');

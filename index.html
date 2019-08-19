@@ -16,13 +16,18 @@
   <div class="container-liquid" style="height:100%;">
     <div class="row h-100" style="margin:0px;">
         <div id="metris-bar" class="col-4 p-0 h-md-100 metris-bar">
-          <div class="text-white d-md-flex align-items-center h-100 p-5 text-center justify-content-center">
-            <div class="logoarea pt-5 pb-5">
-              <span id="metris-bar-name" data-bind="text: Model.Name"></span>
-          </div>
-            <div class="logoarea pt-5 pb-5">
-                  <img id="statusIcon" style="max-width:80%; height:auto;" src="images/fail.png" alt="Fail">
-              </div>
+          <div class="row text-white d-md-flex align-items-center text-center justify-content-center" style="height:300px; padding-top:300px;">
+            <div class="col" style="margin-bottom:25px;">
+                Connected to: <span id="metris-bar-name" data-bind="text: Model.Name"></span>
+            </div>
+             <div class="w-100"></div>
+             <div class="col">
+                <img id="statusIcon" style="max-width:80%; height:auto;" src="images/fail.png" alt="Fail">
+             </div>
+             <div class="w-100"></div>
+             <div class="col" style="margin-top:25px;">
+                Status: <span id="metris-bar-name" data-bind="text: Model.StatusDescription"></span>
+             </div>
           </div>    
         </div>
         <div class="col-8" style="padding-left:0px; padding-right:0px;">
@@ -63,15 +68,13 @@
     require("bootstrap");
 
     $(function() {
-      
       const links = document.querySelectorAll('link[rel="import"]');
       links.forEach((link) => {
         let template = link.import.querySelector('template');
         let clone = document.importNode(template.content, true);
         let target = clone.querySelector(".template").dataset.tab;
         document.getElementById(target).appendChild(clone);
-      }); 
-
+      });
     });
   </script>
   <script src="viewmodels/index.js"></script>
