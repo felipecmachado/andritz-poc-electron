@@ -131,3 +131,7 @@ app.on('activate', () => {
 module.exports.setImage = function(path) {
   tray.setImage(path);
 };
+
+module.exports.sendMessage = function(arg1, arg2) {
+  mainWindow.webContents.send(arg1, arg2);
+};

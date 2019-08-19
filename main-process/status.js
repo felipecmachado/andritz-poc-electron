@@ -1,13 +1,8 @@
 const http = require('http');
-//const electron = require('electron');
-//const path = require('path');
-
 const main = require('../main.js');
 
+// Will get status every 1 second
 setInterval(getConnectorStatus, 1000);
-
-//let tray = null;  
-//tray = new electron.Tray(path.join(__dirname, '../images/connectorPaused.png'));
 
 /****************************
  * Functions
@@ -15,8 +10,7 @@ setInterval(getConnectorStatus, 1000);
 
 function getConnectorStatus(){
 
-    http.get('http://localhost:9100/api/connector/status', (resp) => {
-        console.log("PASSOU");   
+    http.get('http://localhost:9100/api/connector/status', (resp) => { 
         let data = '';
 
         // A chunk of data has been recieved.
@@ -27,6 +21,7 @@ function getConnectorStatus(){
         // The whole response has been received. Process the result.
         resp.on('end', () => {
             var connectorData = JSON.parse(data);
+            main.sendMessage('connector-status', connectorData);
 
             //Refresh tray status icon
             if(connectorData.serviceStatus == 3){
@@ -44,4 +39,3 @@ function getConnectorStatus(){
         console.log("Error: " + err.message);
     });  
 }
-

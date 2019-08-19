@@ -24,6 +24,10 @@
                     .withUrl("http://localhost:9100/controlhub")
                     .build();
 
+        connection.on("Receive", data => {
+            addMessage(data);
+        });
+
         // https://getbootstrap.com/docs/4.0/components/navs/#events
         function configureLogsBehavior(){
             $('#logs-tab').on('shown.bs.tab', function(){
@@ -38,10 +42,6 @@
         function connect(){
             connection.start()
                 .then(() => connection.invoke("SendMessage", "System tray connected to " + connection.connection.baseUrl));
-
-            connection.on("Receive", data => {
-                addMessage(data);
-            });
         }
 
         function disconnect(){

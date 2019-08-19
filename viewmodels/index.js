@@ -23,17 +23,18 @@ function StatusBarViewModel(){
 
     ko.applyBindings(statusBarViewModel);
 
-    ipcRenderer.on('connector-data', function (event,connectorData) {
-        self.connectorId(connectorData.connectorId);
-        self.startedAt(connectorData.startedAt);
-        self.serviceStatus(connectorData.serviceStatus);        
+    ipcRenderer.on('connector-status', function (event,connectorData) {
+        console.log(connectorData);
+        model.ConnectorId(connectorData.connectorId);
+        model.StartedAt(connectorData.startedAt);
+        model.ServiceStatus(connectorData.serviceStatus);        
 
-        if(self.serviceStatus() == 3){
-            document.getElementById('statusIcon').src = "../images/sucess.png";
-            self.StatusDescription('Running');
+        if(model.ServiceStatus == 3){
+            document.getElementById('statusIcon').src = "images/sucess.png";
+            model.StatusDescription('Running');
         }else{
-            document.getElementById('statusIcon').src = "../images/fail.png";
-            self.StatusDescription('Not Running');
+            document.getElementById('statusIcon').src = "images/fail.png";
+            model.StatusDescription('Not Running');
         }
     });
 }
