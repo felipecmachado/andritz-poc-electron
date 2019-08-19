@@ -19,35 +19,50 @@ function StatusBarViewModel(){
     self.Model = Model;
     
     ipcRenderer.on('connector-status', function (event,connectorData) {
-        Model.ConnectorId(connectorData.connectorId);
-        Model.StartedAt(connectorData.startedAt);
-        Model.StartedAt(connectorData.lastSetupAt);
-        Model.ServiceStatus(connectorData.serviceStatus);
-        Model.LastSetupAt(connectorData.lastSetupAt);   
-        Model.CanStop(connectorData.canStop);   
-        Model.CanStart(connectorData.canStart);   
 
-        switch(Model.ServiceStatus){
-            case 0: // Stopped = 0 
+        try {
+
+            if(connectorData.hasOwnProperty('offline') && connectorData.offline == true)
+            {
                 document.getElementById('statusIcon').src = "images/fail.png";
-                Model.StatusDescription('Stopped');
-                break;
-            case 1: // Stopping = 1 
-                document.getElementById('statusIcon').src = "images/fail.png";
-                Model.StatusDescription('Stopping');
-                break;
-            case 2: // Starting = 2
-                document.getElementById('statusIcon').src = "images/sucess.png";
-                Model.StatusDescription('Starting');
-                break;
-            case 3: // Running = 3
-                document.getElementById('statusIcon').src = "images/sucess.png";
-                Model.StatusDescription('Running');
-                break;
-            default:
-                document.getElementById('statusIcon').src = "images/sucess.png";
-                Model.StatusDescription('Running');
-                break;
+                Model.StatusDescription('Offline');
+                return;
+            }
+
+            Model.ConnectorId(connectorData.connectorId);
+            Model.StartedAt(connectorData.startedAt);
+            Model.StartedAt(connectorData.lastSetupAt);
+            Model.ServiceStatus(connectorData.serviceStatus);
+            Model.LastSetupAt(connectorData.lastSetupAt);   
+            Model.CanStop(connectorData.canStop);   
+            Model.CanStart(connectorData.canStart);   
+
+            switch(connectorData.serviceStatus){
+                case 0: // Stopped = 0 
+                    document.getElementById('statusIcon').src = "images/fail.png";
+                    Model.StatusDescription('Stopped');
+                    break;
+                case 1: // Stopping = 1 
+                    document.getElementById('statusIcon').src = "images/fail.png";
+                    Model.StatusDescription('Stopping');
+                    break;
+                case 2: // Starting = 2
+                    document.getElementById('statusIcon').src = "images/sucess.png";
+                    Model.StatusDescription('Starting');
+                    break;
+                case 3: // Running = 3
+                    document.getElementById('statusIcon').src = "images/sucess.png";
+                    Model.StatusDescription('Running');
+                    break;
+                default:
+                    document.getElementById('statusIcon').src = "images/fail.png";
+                    Model.StatusDescription('Offline');
+                    break;
+            }
+        }
+        catch(e){
+            document.getElementById('statusIcon').src = "images/fail.png";
+            Model.StatusDescription('Error');
         }
     });
 }

@@ -4,12 +4,8 @@ const main = require('../main.js');
 // Will get status every 1 second
 setInterval(getConnectorStatus, 1000);
 
-/****************************
- * Functions
-****************************/
-
 function getConnectorStatus(){
-
+    //TODO: Replace for the API url
     http.get('http://localhost:9100/api/connector/status', (resp) => { 
         let data = '';
 
@@ -36,7 +32,8 @@ function getConnectorStatus(){
         });
 
     }).on("error", (err) => {
-        console.log("Error: " + err.message);
+        var obj = { "offline": true, "error": 'An error occured:' + err };
+        main.sendMessage('connector-status', obj);
         main.setImage('images/connectorPaused.png');
     });  
 }
