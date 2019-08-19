@@ -18,6 +18,12 @@
         </div>
     </div>
     <script>
+        //https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/signalr/javascript-client.md
+        const signalR = require('@aspnet/signalr');  
+        const connection = new signalR.HubConnectionBuilder()
+                    .withUrl("http://localhost:9100/controlhub")
+                    .build();
+
         // https://getbootstrap.com/docs/4.0/components/navs/#events
         function configureLogsBehavior(){
             $('#logs-tab').on('shown.bs.tab', function(){
@@ -29,21 +35,30 @@
             });
         }
 
-        var interval;
-
         function connect(){
-            interval = setInterval(function() {addRow();}, 1000);
+            connection.start()
+                .then(() => connection.invoke("SendMessage", "System tray connected to " + connection.connection.baseUrl));
+
+            connection.on("Receive", data => {
+                addMessage(data);
+            });
         }
 
         function disconnect(){
-            clearInterval(interval);
+            connection.stop();
         }
 
-        function addRow(){
+        function addMessage(data){
             var today = new Date();
             var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-            var row = "<tr><th scope='row'>" + time + "</th><td>LOG</td><td>Message</td></tr>"
+            var row = "<tr><th scope='row'>" + time + "</th><td>LOG</td><td>" + data + "</td></tr>"
             $("#metris-table-logs tbody").prepend(row);
+
+            var rowcount = $("metris-table-logs tr").length;
+            if(rowcount > 50)
+            {
+                $("#table-body tr:last-child").remove();
+            }
         }
 
         $(function() {
