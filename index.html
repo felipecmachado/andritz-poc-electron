@@ -13,7 +13,8 @@
   <script src="libs/knockout.js"></script>
 </head>
 <body>
-  <div class="container-liquid" style="height:100%;">
+  <main class="container-liquid" style="height:100%;">
+
     <div class="row h-100" style="margin:0px;">
         <div id="metris-bar" class="col-4 p-0 h-md-100 metris-bar">
           <div class="row text-white d-md-flex align-items-center text-center justify-content-center" style="height:300px; padding-top:300px;">
@@ -59,7 +60,24 @@
               </div>
         </div>
     </div>
-  </div>
+     <!-- Toasts -->
+     <div aria-live="polite" aria-atomic="true">
+        <!-- Position it -->
+        <div style="position: absolute; top: 3rem; right: 10px;">
+            <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="4000">
+                <div class="toast-header">
+                    <strong class="mr-auto">New Message</strong>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="toast-body">
+                    Connector is back online
+                </div>
+            </div>
+        </div>
+    </div>
+  </main>
   <script>
 
     require('./libs/renderer.js');
