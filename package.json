@@ -6,7 +6,7 @@
   "author": "Andritz AG",
   "homepage": "https://www.andritz.com/metris-en",
   "devDependencies": {
-    "electron": "^3.1.13"
+    "electron": "^15.5.5"
   },
   "dependencies": {
     "@aspnet/signalr": "^1.1.4",
